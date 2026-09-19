@@ -11,10 +11,14 @@ from dataclasses import dataclass
 from fastapi import Request
 
 from ..config import settings
-from ..hermes.health import HealthMonitor
+from ..hermes.health import HealthMonitor, HealthSnapshot
 from ..hermes.proxy import HermesClient
+from ..hermes.queries.fanout import cache
 from ..hermes.readdb import readers
 from ..hermes.registry import BoardRegistry, registry
+from ..stream import protocol
+from ..stream.hub import hub
+from ..stream.tailer import Tailer
 
 log = logging.getLogger(__name__)
 
@@ -24,6 +28,7 @@ class AppState:
     client: HermesClient
     health: HealthMonitor
     registry: BoardRegistry
+    tailer: Tailer
 
 
 async def _rescan_loop(reg: BoardRegistry, client: HermesClient) -> None:
@@ -51,10 +56,20 @@ async def lifespan_state() -> AsyncIterator[AppState]:
     registry.scan(force=True)
     log.info("discovered %s", registry.summary())
 
+    tailer = Tailer(registry, hub)
+
+    def on_hermes_change(snapshot: HealthSnapshot) -> None:
+        # Every browser needs to know the moment writes become available or stop being.
+        hub.broadcast(None, protocol.hermes_state(snapshot.to_dict()))
+        cache.invalidate()
+
+    health.on_change(on_hermes_change)
+
     await health.start()
+    await tailer.start()
     rescan = asyncio.create_task(_rescan_loop(registry, client), name="board-rescan")
 
-    state = AppState(client=client, health=health, registry=registry)
+    state = AppState(client=client, health=health, registry=registry, tailer=tailer)
     try:
         yield state
     finally:
@@ -63,6 +78,7 @@ async def lifespan_state() -> AsyncIterator[AppState]:
             await rescan
         except asyncio.CancelledError:
             pass
+        await tailer.stop()
         await health.stop()
         await client.aclose()
         readers.close_all()

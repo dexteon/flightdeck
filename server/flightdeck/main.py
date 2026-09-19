@@ -12,9 +12,10 @@ from contextlib import asynccontextmanager
 from collections.abc import AsyncIterator
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from .api import routes_health
+from .api import routes_fleet, routes_health, routes_stream, routes_tasks
 from .api.deps import lifespan_state
 from .config import settings
 
@@ -49,10 +50,28 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(routes_health.router, prefix="/api")
+    app.include_router(routes_fleet.router, prefix="/api")
+    app.include_router(routes_tasks.router, prefix="/api")
+    # The websocket is not under /api: it is the transport, not a resource.
+    app.include_router(routes_stream.router)
 
     dist = settings.web_dist
     if dist.is_dir():
-        app.mount("/", StaticFiles(directory=dist, html=True), name="spa")
+        app.mount("/assets", StaticFiles(directory=dist / "assets"), name="assets")
+
+        index = dist / "index.html"
+
+        @app.get("/{full_path:path}", include_in_schema=False)
+        async def spa(full_path: str) -> FileResponse:
+            """Serve the built file when there is one, else the shell.
+
+            Client-side routes like /fleet and /b/<slug>/t/<id> have no file behind
+            them, so a bare StaticFiles mount 404s them on refresh or on a shared link.
+            """
+            candidate = (dist / full_path).resolve()
+            if full_path and candidate.is_file() and candidate.is_relative_to(dist.resolve()):
+                return FileResponse(candidate)
+            return FileResponse(index)
     else:
         log.warning("web/dist not built; serving API only")
 
