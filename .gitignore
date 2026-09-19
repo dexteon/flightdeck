@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+var/
+web/dist/
+web/node_modules/
+
+# Small fixtures are committed; the big generated perf fixture is not.
+tests/fixtures/**/*.db
+tests/fixtures/**/*.db-shm
+tests/fixtures/**/*.db-wal
+!tests/fixtures/wan2gp/**
+
+.env

@@ -1,0 +1,455 @@
+[
+  {
+    "from": "triage",
+    "to": "todo",
+    "request": {
+      "status": "todo"
+    },
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "task": {
+          "id": "t_436369c9",
+          "title": "spike-todo",
+          "body": "Flightdeck Phase 0 spike. Safe to delete.",
+          "assignee": null,
+          "status": "todo",
+          "priority": 0,
+          "created_by": "dashboard",
+          "created_at": 1789791134,
+          "started_at": null,
+          "completed_at": null,
+          "workspace_kind": "scratch",
+          "workspace_path": null,
+          "claim_lock": null,
+          "claim_expires": null,
+          "tenant": null,
+          "branch_name": null,
+          "project_id": null,
+          "result": null,
+          "idempotency_key": null,
+          "consecutive_failures": 0,
+          "worker_pid": null,
+          "last_failure_error": null,
+          "max_runtime_seconds": null,
+          "last_heartbeat_at": null,
+          "current_run_id": null,
+          "workflow_template_id": null,
+          "current_step_key": null,
+          "skills": null,
+          "model_override": null,
+          "provider_override": null,
+          "reasoning_effort": null,
+          "max_retries": null,
+          "goal_mode": false,
+          "goal_max_turns": null,
+          "session_id": null,
+          "block_kind": null,
+          "block_recurrences": 0,
+          "completion_contract": "local-only",
+          "age": {
+            "created_age_seconds": 0,
+            "started_age_seconds": null,
+            "time_to_complete_seconds": null
+          },
+          "latest_summary": null
+        }
+      }
+    },
+    "status_after": "todo"
+  },
+  {
+    "from": "triage",
+    "to": "ready",
+    "request": {
+      "status": "ready"
+    },
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "task": {
+          "id": "t_2f71f936",
+          "title": "spike-ready",
+          "body": "Flightdeck Phase 0 spike. Safe to delete.",
+          "assignee": null,
+          "status": "ready",
+          "priority": 0,
+          "created_by": "dashboard",
+          "created_at": 1789791134,
+          "started_at": null,
+          "completed_at": null,
+          "workspace_kind": "scratch",
+          "workspace_path": null,
+          "claim_lock": null,
+          "claim_expires": null,
+          "tenant": null,
+          "branch_name": null,
+          "project_id": null,
+          "result": null,
+          "idempotency_key": null,
+          "consecutive_failures": 0,
+          "worker_pid": null,
+          "last_failure_error": null,
+          "max_runtime_seconds": null,
+          "last_heartbeat_at": null,
+          "current_run_id": null,
+          "workflow_template_id": null,
+          "current_step_key": null,
+          "skills": null,
+          "model_override": null,
+          "provider_override": null,
+          "reasoning_effort": null,
+          "max_retries": null,
+          "goal_mode": false,
+          "goal_max_turns": null,
+          "session_id": null,
+          "block_kind": null,
+          "block_recurrences": 0,
+          "completion_contract": "local-only",
+          "age": {
+            "created_age_seconds": 0,
+            "started_age_seconds": null,
+            "time_to_complete_seconds": null
+          },
+          "latest_summary": null
+        }
+      }
+    },
+    "status_after": "ready"
+  },
+  {
+    "from": "triage",
+    "to": "scheduled",
+    "request": {
+      "status": "scheduled"
+    },
+    "result": {
+      "ok": false,
+      "status": 409,
+      "detail": "status transition to 'scheduled' not valid from current state"
+    },
+    "status_after": "triage"
+  },
+  {
+    "from": "triage",
+    "to": "review",
+    "request": {
+      "status": "review"
+    },
+    "result": {
+      "ok": false,
+      "status": 409,
+      "detail": "status transition to 'review' not valid from current state"
+    },
+    "status_after": "triage"
+  },
+  {
+    "from": "triage",
+    "to": "blocked",
+    "request": {
+      "status": "blocked",
+      "block_reason": "spike: verifying the block verb"
+    },
+    "result": {
+      "ok": false,
+      "status": 409,
+      "detail": "status transition to 'blocked' not valid from current state"
+    },
+    "status_after": "triage"
+  },
+  {
+    "from": "triage",
+    "to": "done",
+    "request": {
+      "status": "done"
+    },
+    "result": {
+      "ok": false,
+      "status": 409,
+      "detail": "status transition to 'done' not valid from current state"
+    },
+    "status_after": "triage"
+  },
+  {
+    "from": "triage",
+    "to": "archived",
+    "request": {
+      "status": "archived"
+    },
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "task": {
+          "id": "t_93590e63",
+          "title": "spike-archived",
+          "body": "Flightdeck Phase 0 spike. Safe to delete.",
+          "assignee": null,
+          "status": "archived",
+          "priority": 0,
+          "created_by": "dashboard",
+          "created_at": 1789791134,
+          "started_at": null,
+          "completed_at": null,
+          "workspace_kind": "scratch",
+          "workspace_path": null,
+          "claim_lock": null,
+          "claim_expires": null,
+          "tenant": null,
+          "branch_name": null,
+          "project_id": null,
+          "result": null,
+          "idempotency_key": null,
+          "consecutive_failures": 0,
+          "worker_pid": null,
+          "last_failure_error": null,
+          "max_runtime_seconds": null,
+          "last_heartbeat_at": null,
+          "current_run_id": null,
+          "workflow_template_id": null,
+          "current_step_key": null,
+          "skills": null,
+          "model_override": null,
+          "provider_override": null,
+          "reasoning_effort": null,
+          "max_retries": null,
+          "goal_mode": false,
+          "goal_max_turns": null,
+          "session_id": null,
+          "block_kind": null,
+          "block_recurrences": 0,
+          "completion_contract": "local-only",
+          "age": {
+            "created_age_seconds": 0,
+            "started_age_seconds": null,
+            "time_to_complete_seconds": null
+          },
+          "latest_summary": null
+        }
+      }
+    },
+    "status_after": "archived"
+  },
+  {
+    "from": "triage",
+    "to": "running",
+    "request": {
+      "status": "running"
+    },
+    "result": {
+      "ok": false,
+      "status": 400,
+      "detail": "Cannot set status to 'running' directly; use the dispatcher/claim path"
+    },
+    "status_after": "triage"
+  },
+  {
+    "from": "triage",
+    "to": "bogus",
+    "request": {
+      "status": "bogus"
+    },
+    "result": {
+      "ok": false,
+      "status": 400,
+      "detail": "unknown status: bogus"
+    },
+    "status_after": "triage"
+  },
+  {
+    "field": "priority",
+    "request": {
+      "priority": 7
+    },
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "task": {
+          "id": "t_7df0a43e",
+          "title": "spike-fields",
+          "body": "Flightdeck Phase 0 spike. Safe to delete.",
+          "assignee": null,
+          "status": "triage",
+          "priority": 7,
+          "created_by": "dashboard",
+          "created_at": 1789791134,
+          "started_at": null,
+          "completed_at": null,
+          "workspace_kind": "scratch",
+          "workspace_path": null,
+          "claim_lock": null,
+          "claim_expires": null,
+          "tenant": null,
+          "branch_name": null,
+          "project_id": null,
+          "result": null,
+          "idempotency_key": null,
+          "consecutive_failures": 0,
+          "worker_pid": null,
+          "last_failure_error": null,
+          "max_runtime_seconds": null,
+          "last_heartbeat_at": null,
+          "current_run_id": null,
+          "workflow_template_id": null,
+          "current_step_key": null,
+          "skills": null,
+          "model_override": null,
+          "provider_override": null,
+          "reasoning_effort": null,
+          "max_retries": null,
+          "goal_mode": false,
+          "goal_max_turns": null,
+          "session_id": null,
+          "block_kind": null,
+          "block_recurrences": 0,
+          "completion_contract": "local-only",
+          "age": {
+            "created_age_seconds": 0,
+            "started_age_seconds": null,
+            "time_to_complete_seconds": null
+          },
+          "latest_summary": null
+        }
+      }
+    }
+  },
+  {
+    "field": "title",
+    "request": {
+      "title": "spike-fields renamed"
+    },
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "task": {
+          "id": "t_7df0a43e",
+          "title": "spike-fields renamed",
+          "body": "Flightdeck Phase 0 spike. Safe to delete.",
+          "assignee": null,
+          "status": "triage",
+          "priority": 7,
+          "created_by": "dashboard",
+          "created_at": 1789791134,
+          "started_at": null,
+          "completed_at": null,
+          "workspace_kind": "scratch",
+          "workspace_path": null,
+          "claim_lock": null,
+          "claim_expires": null,
+          "tenant": null,
+          "branch_name": null,
+          "project_id": null,
+          "result": null,
+          "idempotency_key": null,
+          "consecutive_failures": 0,
+          "worker_pid": null,
+          "last_failure_error": null,
+          "max_runtime_seconds": null,
+          "last_heartbeat_at": null,
+          "current_run_id": null,
+          "workflow_template_id": null,
+          "current_step_key": null,
+          "skills": null,
+          "model_override": null,
+          "provider_override": null,
+          "reasoning_effort": null,
+          "max_retries": null,
+          "goal_mode": false,
+          "goal_max_turns": null,
+          "session_id": null,
+          "block_kind": null,
+          "block_recurrences": 0,
+          "completion_contract": "local-only",
+          "age": {
+            "created_age_seconds": 0,
+            "started_age_seconds": null,
+            "time_to_complete_seconds": null
+          },
+          "latest_summary": null
+        }
+      }
+    }
+  },
+  {
+    "field": "body",
+    "request": {
+      "body": "rewritten by the spike"
+    },
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "task": {
+          "id": "t_7df0a43e",
+          "title": "spike-fields renamed",
+          "body": "rewritten by the spike",
+          "assignee": null,
+          "status": "triage",
+          "priority": 7,
+          "created_by": "dashboard",
+          "created_at": 1789791134,
+          "started_at": null,
+          "completed_at": null,
+          "workspace_kind": "scratch",
+          "workspace_path": null,
+          "claim_lock": null,
+          "claim_expires": null,
+          "tenant": null,
+          "branch_name": null,
+          "project_id": null,
+          "result": null,
+          "idempotency_key": null,
+          "consecutive_failures": 0,
+          "worker_pid": null,
+          "last_failure_error": null,
+          "max_runtime_seconds": null,
+          "last_heartbeat_at": null,
+          "current_run_id": null,
+          "workflow_template_id": null,
+          "current_step_key": null,
+          "skills": null,
+          "model_override": null,
+          "provider_override": null,
+          "reasoning_effort": null,
+          "max_retries": null,
+          "goal_mode": false,
+          "goal_max_turns": null,
+          "session_id": null,
+          "block_kind": null,
+          "block_recurrences": 0,
+          "completion_contract": "local-only",
+          "age": {
+            "created_age_seconds": 0,
+            "started_age_seconds": null,
+            "time_to_complete_seconds": null
+          },
+          "latest_summary": null
+        }
+      }
+    }
+  },
+  {
+    "verb": "POST /links",
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    }
+  },
+  {
+    "verb": "DELETE /links",
+    "result": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    }
+  }
+]
