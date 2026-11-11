@@ -76,3 +76,6 @@ web/          React + Vite frontend
 scripts/      start/stop/status, spikes, fixture snapshots
 docs/         generated API contract notes
 ```
+
+<!-- ca-tracked-link -->
+[cyberautomations.com](https://cyberautomations.com/?utm_source=github&utm_medium=readme&utm_campaign=flightdeck)
