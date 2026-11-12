@@ -11,11 +11,17 @@ inspection.
 Flightdeck owns what Hermes structurally cannot do, and delegates ordinary card create
 and edit back to Hermes by deep link.
 
-- Fleet view across every board at once
-- Live worker inspector: active workers, per-process cpu and memory, heartbeat staleness,
-  streaming log follow, terminate
-- Cross-board unified queue, global search, triage and blocked inbox
-- Dependency graph over `task_links`
+What works today (all read-only):
+
+- Fleet view across every board at once (`GET /fleet`)
+- Running claims across every board, with heartbeat staleness per row (`GET /fleet/running`)
+- Cross-board unified queue (`GET /fleet/queue`)
+- Alerts for stale claims, blocked work and long-queued ready tasks (`GET /fleet/alerts`)
+- Per-board task lists and task detail with parent and child links (`GET /boards/...`)
+- Live updates over a websocket (`/ws`)
+
+Planned, not built yet: per-process cpu and memory, streaming log follow, terminate,
+global search, a dependency graph view, a fixture-backed dev mode, and write-path tests.
 
 ## How it talks to Hermes
 
@@ -49,21 +55,15 @@ uv pip install -e ".[dev]"
 `start.ps1` records the PID at spawn; `stop.ps1` kills only that PID after confirming the
 process image and start time match. It never matches on a command line.
 
-## Development against fixtures
+## Tests
 
 ```powershell
-.\scripts\dev.ps1 -Fixtures
+.venv\Scripts\python.exe -m pytest
 ```
 
-Points `HERMES_KANBAN_HOME` at a copied fixture tree, so the whole UI is exercisable with
-no possibility of touching live data. This is the default mode for development.
-
-Write-path tests are opt-in and refuse to run anywhere but a scratch board:
-
-```powershell
-$env:FLIGHTDECK_WRITE_TEST_BOARD = 'flightdeck-test'
-.venv\Scripts\python.exe -m pytest tests/write
-```
+The suite runs offline. `tests/test_no_writes.py` guards the core promise that the read
+path never writes to a Hermes database. CI runs the same suite plus the web build on
+every push.
 
 ## Layout
 
@@ -73,7 +73,7 @@ server/flightdeck/
   stream/     task_events tailer, log follower, websocket hub
   api/        FastAPI routes
 web/          React + Vite frontend
-scripts/      start/stop/status, spikes, fixture snapshots
+scripts/      start/stop/status and the API spike scripts
 docs/         generated API contract notes
 ```
 
